@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Animación con anime.js</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    .animable {
+      width: 100px;
+      height: 100px;
+      background-color: #FF4136;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #el1 {
+      background-color: #FF4136;
+    }
+
+    #el2 {
+      background-color: #0074D9;
+    }
+  </style>
+</head>
+<body>
+  <div id="el1" class="animable"></div>
+  <div id="el2" class="animable"></div>
+
+  <script>
+    var el1 = document.getElementById('el1');
+    var el2 = document.getElementById('el2');
+
+    var animation = anime.timeline({
+      targets: [el1, el2],
+      duration: function() { return anime.random(600, 2200); },
+      easing: function() { return easings[anime.random(0, easings.length - 1)]; },
+      complete: function(anim) { animateShape(anim.animatables[1].target); },
+    })
+
+    function animateShape(target) {
+      anime({
+        targets: target,
+        rotate: 360,
+        duration: 1000,
+        easing: 'linear'
+      })
+    }
+  </script>
+</body>
+</html>
